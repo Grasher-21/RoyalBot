@@ -1,6 +1,6 @@
 {
   "name": "RoyalBot",
-  "description": "Test",
+  "description": "RoyalBot",
   "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
