@@ -96,9 +96,8 @@ client.on('message', message => {
       // Generate random number
       if (command.length == 2) {
          if (command[0] === '!roll' && !isNaN(command[1])) {
-            //var number = Math.round(Math.random() * comamnd[1]);
-            //message.reply(`Number rolled: ${number}`);
-            message.reply(`Number rolled: 1`);
+            var number = Math.round(Math.random() * comamnd[1]);
+            message.reply(`Number rolled: ${number}`);
          }
          else {
             invalidCommand(message);
