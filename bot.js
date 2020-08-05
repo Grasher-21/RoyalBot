@@ -22,7 +22,6 @@ client.on('message', message => {
 
    // Cleaning messages from a channel
    deleteMessagesFromChannel(message);
-   
 
    if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
@@ -91,8 +90,9 @@ client.on('message', message => {
       // Generate random number
       if (command.length == 2) {
          if (command[0] === '!roll' && !isNaN(command[1])) {
-            var number = Math.round(Math.random() * comamnd[1]);
-            message.reply(`Number rolled: ${number}`);
+            //var number = Math.round(Math.random() * comamnd[1]);
+            //message.reply(`Number rolled: ${number}`);
+            message.reply(`Number rolled: 1`);
          }
       }
       else {
@@ -111,7 +111,7 @@ Tag: ${message.author.tag}
 
 function invalidCommand(message) {
    message.reply('Invalid command!').then(msg => {
-      msg.delete(5000);
+      msg.delete(10000);
    });
 }
 
