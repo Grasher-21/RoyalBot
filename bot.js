@@ -7,6 +7,8 @@ const botId = '730084929693810691';
 const botLogChannelId = '740500341346402306';
 const botCommand = '!';
 
+const generalChannelId = '729853752911069275';
+
 const elryusChannelId = '729854794986160168';
 const elryusMessageId = '740225386050224249';
 
@@ -18,9 +20,9 @@ client.on('message', message => {
    // properties of the message
    // console.log(message); 
 
-   if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
-      logCommandRequest(message);
+   logCommandRequest(message);
 
+   if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       var command = message.content.split(' ');
 
       // Removing loot
@@ -43,8 +45,6 @@ client.on('message', message => {
 
                msg.edit(newMessage);
             });
-
-            message.delete();
          }
       }
       // Adding loot
@@ -71,9 +71,26 @@ client.on('message', message => {
 
                msg.edit(newMessage);
             });
-
-            message.delete();
          }
+      }
+      else {
+         invalidCommand(message);
+      }
+
+      message.delete();
+   }
+   else if (message.channel.id == generalChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
+      var command = message.content.split(' ');
+
+      // Generate random number
+      if (command.length == 2) {
+         if (command[0] === '!roll' && !isNaN(command[1])) {
+            var number = Math.round(Math.random() * comamnd[1]);
+            message.reply(`Number rolled: ${number}`);
+         }
+      }
+      else {
+         invalidCommand(message);
       }
    }
 });
@@ -84,6 +101,12 @@ Command requested: ${message.content}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
 \`\`\``);
+}
+
+function invalidCommand(message) {
+   message.reply('Invalid command!').then(msg => {
+      msg.delete(5000);
+   });
 }
 
 function deleteMessagesFromChannel(message) {
