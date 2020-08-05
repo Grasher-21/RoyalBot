@@ -21,7 +21,7 @@ client.on('message', message => {
    // console.log(message); 
 
    // Cleaning messages from a channel
-   deleteMessagesFromChannel(message);
+   // deleteMessagesFromChannel(message);
 
    if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
@@ -49,6 +49,9 @@ client.on('message', message => {
                msg.edit(newMessage);
             });
          }
+         else {
+            invalidCommand(message);
+         }
       }
       // Adding loot
       else if (command.length >= 3) {
@@ -75,6 +78,9 @@ client.on('message', message => {
                msg.edit(newMessage);
             });
          }
+         else {
+            invalidCommand(message);
+         }
       }
       else {
          invalidCommand(message);
@@ -94,6 +100,9 @@ client.on('message', message => {
             //message.reply(`Number rolled: ${number}`);
             message.reply(`Number rolled: 1`);
          }
+         else {
+            invalidCommand(message);
+         }
       }
       else {
          invalidCommand(message);
@@ -111,7 +120,7 @@ Tag: ${message.author.tag}
 
 function invalidCommand(message) {
    message.reply('Invalid command!').then(msg => {
-      msg.delete({ timeout: 10000 });
+      msg.delete({ timeout: 5000 });
    });
 }
 
