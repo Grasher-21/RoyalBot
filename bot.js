@@ -1,17 +1,18 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const userAdmin = '101462082016260096';
+
 const botId = '730084929693810691';
 const botLogChannelId = '740500341346402306';
 const botCommand = '!';
 
-const userAdmin = '101462082016260096';
 const elryusChannelId = '729854794986160168';
 const elryusMessageId = '740225386050224249';
 
 client.login(process.env.BOT_TOKEN);
 
-client.on('ready', () => { console.log(`Logged in as ${client.user.tag}!`); });
+// client.on('ready', () => { console.log(`Logged in as ${client.user.tag}!`); });
 
 client.on('message', message => {
    // properties of the message
@@ -78,22 +79,24 @@ client.on('message', message => {
 });
 
 function logCommandRequest(message) {
-   client.channels.cache.get(botLogChannelId).send(`${message.author.username} requested: ${message.content}`);
+   client.channels.cache.get(botLogChannelId).send(`\`\`\`
+Command requested: ${message.content}
+Username: ${message.author.username}
+Tag: ${message.author.tag}
+\`\`\``);
 }
 
-
-//if (message.channel.id == 735441393090035835) // Bot Channel
-//{
-//   // User Admin rights
-//   if (message.author.id == userAdmin && message.content === `!del messages`) {
-//      console.log('Deleting messages...');
-//      async function clear() {
-//         message.channel.bulkDelete(100).catch(console.error);
-//      }
-//      clear();
-//      console.log('Messages deleted...');
-//   }
-//}
+function deleteMessagesFromChannel(message) {
+   // User Admin rights
+   if (message.author.id == userAdmin && message.content === `!del messages`) {
+      console.log('Deleting messages...');
+      async function clear() {
+         message.channel.bulkDelete(100).catch(console.error);
+      }
+      clear();
+      console.log('Messages deleted...');
+   }
+}
 
 var elryusInitialMessage = `\`\`\`Loot in Elryus' Island chests
 #1  = Empty
