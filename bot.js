@@ -111,7 +111,7 @@ Tag: ${message.author.tag}
 
 function invalidCommand(message) {
    message.reply('Invalid command!').then(msg => {
-      msg.delete(10000);
+      msg.delete({ timeout: 10000 });
    });
 }
 
