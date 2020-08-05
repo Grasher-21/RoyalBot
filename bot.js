@@ -52,7 +52,6 @@ client.on('message', message => {
             else {
                invalidCommand(message);
             }
-            message.delete();
             break;
 
          case '!add': // Adding loot
