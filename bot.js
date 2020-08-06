@@ -15,6 +15,10 @@ const elryusMessageId = '740225386050224249';
 
 client.login(process.env.BOT_TOKEN);
 
+clien.on('ready', () => {
+   client.channels.cache.get(botTestChannelId).send('/me is back online');
+});
+
 client.on('message', message => {
    // properties of the message
    // console.log(message);
@@ -44,7 +48,7 @@ client.on('message', message => {
 
          switch (command[0]) {
             case '!roll':
-               if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
+               if (command.length == 2 && !isNaN(command[1]) && command[1] > 1) {
                   var rng = Math.floor(Math.random() * command[1]) + 1;
                   message.reply(`number rolled: ${rng}`);
                }
@@ -124,9 +128,9 @@ client.on('message', message => {
 
       switch (command[0]) {
          case '!roll':
-            if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
-               var number = Math.round((Math.random() * command[1]) + 1);
-               message.reply(`number rolled: ${number}`);
+            if (command.length == 2 && !isNaN(command[1]) && command[1] > 1) {
+               var rng = Math.floor(Math.random() * command[1]) + 1;
+               message.reply(`number rolled: ${rng}`);
             }
             break;
       }
