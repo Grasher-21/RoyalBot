@@ -102,20 +102,20 @@ client.on('message', message => {
    }
 });
 
-function notifySuccessRequest(message) {
-   message.reply('command executed successfully!').then(msg => {
-      msg.delete({ timeout: 5000 });
-   });
-
-   message.delete({ timeout: 5000 });
-}
-
 function logCommandRequest(message) {
    client.channels.cache.get(botLogChannelId).send(`\`\`\`
 Command requested: ${message.content}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
 \`\`\``);
+}
+
+function notifySuccessRequest(message) {
+   message.reply('command executed successfully!').then(msg => {
+      msg.delete({ timeout: 5000 });
+   });
+
+   message.delete({ timeout: 5000 });
 }
 
 function invalidCommand(message) {
