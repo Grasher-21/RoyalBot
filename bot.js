@@ -35,18 +35,23 @@ client.on('message', message => {
       }
    }
 
-   if (message.channel.id == botTestChannelId && message.content.startsWith(botCommand) && message.author.id == userAdmin) {
-      var command = message.content.split(' ');
+   if (message.channel.id == botTestChannelId && message.content.startsWith(botCommand)) {
+      if (message.author.id != userAdmin || message.author.id != botId) {
+         message.delete();
+      }
+      else {
+         var command = message.content.split(' ');
 
-      switch (command[0]) {
-         case '!roll':
-            if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
-               var rng = Math.random() * command[1];
-               message.channel.send(`I generated the value: ${rng}`);
-               var number = Math.round((Math.random() * command[1]) + 1);
-               message.reply(`number rolled: ${number}`);
-            }
-            break;
+         switch (command[0]) {
+            case '!roll':
+               if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
+                  var rng = Math.random() * command[1];
+                  message.channel.send(`I generated the value: ${rng}`);
+                  var number = Math.round((Math.random() * command[1]) + 1);
+                  message.reply(`number rolled: ${number}`);
+               }
+               break;
+         }
       }
    }
    else if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
