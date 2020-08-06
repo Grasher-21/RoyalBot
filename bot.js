@@ -16,7 +16,7 @@ const elryusMessageId = '740225386050224249';
 client.login(process.env.BOT_TOKEN);
 
 clien.on('ready', () => {
-   client.channels.cache.get(botTestChannelId).send('/me is back online');
+   client.channels.cache.get(botTestChannelId).send('*is back online*');
 });
 
 client.on('message', message => {
