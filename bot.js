@@ -5,6 +5,7 @@ const userAdmin = '101462082016260096';
 
 const botId = '730084929693810691';
 const botLogChannelId = '740500341346402306';
+const botTestChannelId = '741013228653641769';
 const botCommand = '!';
 
 const generalChannelId = '729853752911069275';
@@ -34,7 +35,21 @@ client.on('message', message => {
       }
    }
 
-   if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
+   if (message.channel.id == botTestChannelId && message.content.startsWith(botCommand) && message.author.id == userAdmin) {
+      var command = message.content.split(' ');
+
+      switch (command[0]) {
+         case '!roll':
+            if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
+               var rng = Math.random() * command[1];
+               message.channel.send(`I generated the value: ${rng}`);
+               var number = Math.round((Math.random() * command[1]) + 1);
+               message.reply(`number rolled: ${number}`);
+            }
+            break;
+      }
+   }
+   else if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
       var command = message.content.split(' ');
