@@ -115,6 +115,9 @@ client.on('message', message => {
             break;
       }
    }
+   else if (message.channel.id == botLogChannelId && message.author.id != botId) {
+      message.delete();
+   }
 });
 
 function logCommandRequest(message) {
@@ -122,6 +125,7 @@ function logCommandRequest(message) {
 Command requested: ${message.content}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
+Guild Member: ${message.member.nickname}
 \`\`\``);
 }
 
