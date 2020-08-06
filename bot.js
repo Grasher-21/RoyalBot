@@ -103,7 +103,7 @@ client.on('message', message => {
 });
 
 function notifySuccessRequest(message) {
-   message.reply('command executed successfully').then(msg => {
+   message.reply('command executed successfully!').then(msg => {
       msg.delete({ timeout: 5000 });
    });
 
@@ -119,7 +119,7 @@ Tag: ${message.author.tag}
 }
 
 function invalidCommand(message) {
-   message.reply('Invalid command!').then(msg => {
+   message.reply('invalid command!').then(msg => {
       msg.delete({ timeout: 5000 });
    });
 
