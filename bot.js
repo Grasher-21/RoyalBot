@@ -30,7 +30,6 @@ client.on('message', message => {
          case '!del': // Delete messages
             if (command.length == 3 && command[1] > 0 && (command[2] == 'message' || command[2] == 'messages')) {
                var messagesToDelete = Number(command[1]) + 1;
-               message.reply(`deleting ${messagesToDelete} messages`);
                async function deleteMessages() {
                   message.channel.bulkDelete(messagesToDelete).catch(console.error);
                }
