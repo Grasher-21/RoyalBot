@@ -19,8 +19,6 @@ client.on('message', message => {
    // console.log(message);
 
    if (message.author.id == userAdmin && message.content.startsWith(botCommand)) {
-      logCommandRequest(message);
-
       var command = message.content.split(' ');
 
       switch (command[0]) {
@@ -121,11 +119,19 @@ client.on('message', message => {
 });
 
 function logCommandRequest(message) {
+   var nickname = '';
+
+   if (message.member.nickname) {
+      nickname = message.member.nickname;
+   }
+   else {
+      nickname = message.author.username;
+   }
+
    client.channels.cache.get(botLogChannelId).send(`\`\`\`
 Command requested: ${message.content}
-Username: ${message.author.username}
+Nickname: ${nickname}
 Tag: ${message.author.tag}
-Guild Member: ${message.member.nickname}
 \`\`\``);
 }
 
