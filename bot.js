@@ -45,13 +45,8 @@ client.on('message', message => {
          switch (command[0]) {
             case '!roll':
                if (command.length == 2 && !isNaN(command[1]) && command[1] > 0) {
-                  var rng = Math.random() * command[1];
-                  message.channel.send(`value generated: ${rng}`);
-                  message.channel.send(`value round: ${Math.round(rng)}`);
-                  message.channel.send(`value floor: ${Math.floor(rng)}`);
-
-                  var number = Math.round((Math.random() * command[1]) + 1);
-                  message.reply(`number rolled: ${number}`);
+                  var rng = Math.floor(Math.random() * command[1]) + 1;
+                  message.reply(`number rolled: ${rng}`);
                }
                break;
          }
