@@ -119,18 +119,17 @@ client.on('message', message => {
 });
 
 function logCommandRequest(message) {
-   var nickname = '';
+   var nickname = 'n/a';
 
    if (message.member.nickname) {
       nickname = message.member.nickname;
    }
-   else {
-      nickname = message.author.username;
-   }
 
    client.channels.cache.get(botLogChannelId).send(`\`\`\`
 Command requested: ${message.content}
+UserID: ${message.author.id}
 Nickname: ${nickname}
+Username: ${message.author.username}
 Tag: ${message.author.tag}
 \`\`\``);
 }
