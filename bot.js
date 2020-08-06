@@ -16,10 +16,25 @@ client.login(process.env.BOT_TOKEN);
 
 client.on('message', message => {
    // properties of the message
-   // console.log(message); 
+   // console.log(message);
 
-   // Cleaning messages from a channel
-   // deleteMessagesFromChannel(message);
+   if (message.author.id == userAdmin && message.content.startsWith(botCommand)) {
+      logCommandRequest(message);
+
+      var command = message.content.split(' ');
+
+      switch (command[0]) {
+         case '!del': // Delete messages
+            if (command.length == 3 && command[1] > 0 && command[2] == 'messages') {
+               async function deleteMessages() {
+                  message.channel.bulkDelete(command[1]).catch(console.error);
+               }
+
+               deleteMessages();
+            }
+            break;
+      }
+   }
 
    if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
@@ -124,18 +139,6 @@ function invalidCommand(message) {
    });
 
    message.delete({ timeout: 5000 });
-}
-
-function deleteMessagesFromChannel(message) {
-   // User Admin rights
-   if (message.author.id == userAdmin && message.content === `!del messages`) {
-      console.log('Deleting messages...');
-      async function clear() {
-         message.channel.bulkDelete(100).catch(console.error);
-      }
-      clear();
-      console.log('Messages deleted...');
-   }
 }
 
 var elryusInitialMessage = `\`\`\`Loot in Elryus' Island chests
