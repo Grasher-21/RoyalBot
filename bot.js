@@ -35,8 +35,8 @@ client.on('message', message => {
       }
    }
 
-   if (message.channel.id == botTestChannelId && message.content.startsWith(botCommand)) {
-      if (message.author.id != userAdmin || message.author.id != botId) {
+   if (message.channel.id == botTestChannelId) {
+      if (message.author.id != userAdmin && message.author.id != botId) {
          message.delete();
       }
       else {
