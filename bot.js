@@ -23,6 +23,7 @@ client.on('message', message => {
    // properties of the message
    // console.log(message);
 
+   // User administrator commands
    if (message.author.id == userAdmin && message.content.startsWith(botCommand)) {
       var command = message.content.split(' ');
 
@@ -131,10 +132,10 @@ client.on('message', message => {
       var command = message.content.split(' ');
 
       switch (command[0]) {
-         case '!roll':
+         case '!roll': // Generating a random number
             if (command.length == 2 && !isNaN(command[1]) && command[1] > 1) {
                var rng = Math.floor(Math.random() * command[1]) + 1;
-               message.reply(`rolled number between 1 and ${command[1]}: ${rng}`);
+               message.reply(`rolled number between 1 and ${command[1]} --> **${rng}**`);
             }
             else {
                invalidCommand(message);
