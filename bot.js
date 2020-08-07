@@ -136,6 +136,9 @@ client.on('message', message => {
                var rng = Math.floor(Math.random() * command[1]) + 1;
                message.reply(`rolled number between 1 and ${command[1]}: ${rng}`);
             }
+            else {
+               invalidCommand(message);
+            }
             break;
       }
    }
