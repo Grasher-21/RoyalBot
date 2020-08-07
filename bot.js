@@ -150,10 +150,10 @@ function logCommandRequest(message) {
 
    client.channels.cache.get(botLogChannelId).send(`\`\`\`
 Command requested: ${message.content}
-UserID: ${message.author.id}
 Nickname: ${nickname}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
+UserID: ${message.author.id}
 \`\`\``);
 }
 
