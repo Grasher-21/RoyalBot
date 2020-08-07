@@ -29,6 +29,7 @@ client.on('message', message => {
 
       switch (command[0]) {
          case '!del': // Delete messages
+         case '!delete':
             if (command.length == 3 && command[1] > 0 && (command[2] == 'message' || command[2] == 'messages')) {
                var messagesToDelete = Number(command[1]) + 1;
                async function deleteMessages() {
@@ -67,6 +68,7 @@ client.on('message', message => {
 
       switch (command[0]) {
          case '!del': // Removing loot
+         case '!delete':
             if (command.length == 2 && command[1] >= 1 && command[1] <= 14) {
                message.channel.messages.fetch(elryusMessageId).then(msg => {
                   var msgArray = msg.content.split('\n');
