@@ -40,7 +40,8 @@ client.on('message', message => {
       }
    }
 
-   if (message.channel.id == botTestChannelId) {
+   // Test channel
+   if (message.channel.id == botTestChannelId) { 
       if (message.author.id != userAdmin && message.author.id != botId) {
          message.delete();
       }
@@ -57,6 +58,7 @@ client.on('message', message => {
          }
       }
    }
+   // Elryus Channel
    else if (message.channel.id == elryusChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
@@ -122,6 +124,7 @@ client.on('message', message => {
             break;
       }
    }
+   // General Channel
    else if (message.channel.id == generalChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
@@ -131,11 +134,12 @@ client.on('message', message => {
          case '!roll':
             if (command.length == 2 && !isNaN(command[1]) && command[1] > 1) {
                var rng = Math.floor(Math.random() * command[1]) + 1;
-               message.reply(`number rolled: ${rng}`);
+               message.reply(`rolled number between 1 and ${command[1]}: ${rng}`);
             }
             break;
       }
    }
+   // Log Channel
    else if (message.channel.id == botLogChannelId && message.author.id != botId) {
       message.delete();
    }
