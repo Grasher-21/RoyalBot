@@ -200,7 +200,7 @@ client.on('message', message => {
 
                   message.channel.send("reached #2");
 
-                  msgArray.add(newEntry);
+                  msgArray.push(newEntry);
                   msgArray.sort();
 
                   message.channel.send("reached #3");
