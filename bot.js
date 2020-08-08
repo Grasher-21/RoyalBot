@@ -192,7 +192,7 @@ client.on('message', message => {
                      }
                   }
                   else {
-                     newEntry = command[2].substring(0, roleMaxLength);
+                     newEntry += command[2].substring(0, roleMaxLength);
                   }
 
                   var msgArray = msg.content.split('\n');
