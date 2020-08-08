@@ -154,7 +154,7 @@ client.on('message', message => {
    else if (message.channel.id == blackListChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
-      var header = '              NAME             |       ROLE     ';
+      var header = 'NAME                          | ROLE           ';
       var nameMaxLength = 30;
       var roleMaxLength = 15;
 
@@ -242,6 +242,8 @@ client.on('message', message => {
                   }
 
                   msg.edit(`${messageQuote}\n${header}\n${entryList}\n${messageQuote}`);
+
+                  notifySuccessRequest(message);
                }
                else {
                   invalidCommand(message);
