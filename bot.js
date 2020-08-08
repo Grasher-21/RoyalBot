@@ -14,7 +14,7 @@ const elryusChannelId = '729854794986160168';
 const elryusMessageId = '740225386050224249';
 
 const blackListChannelId = '741366781079453726';
-const blackListMessageId = '741448254872617131';
+const blackListMessageId = '741464092211937282';
 
 client.login(process.env.BOT_TOKEN);
 
@@ -154,75 +154,70 @@ client.on('message', message => {
 
       var command = message.content.split(' ');
 
-      //switch (command[0]) {
-      //   case '!add': // Adding to the black list
-      //      if (command.length == 3) {
-      //         message.channel.messages.fetch(blackListMessageId).then(msg => {
-      //            var header = 'NAME                           | ROLE           ';
-      //            var messageQuote = `\`\`\``;
-      //            var nameMaxLength = 30;
-      //            var roleMaxLength = 15;
+      switch (command[0]) {
+         case '!add': // Adding to the black list
+            if (command.length == 3) {
+               message.channel.messages.fetch(blackListMessageId).then(msg => {
+                  var header = 'NAME                           | ROLE           ';
+                  var messageQuote = `\`\`\``;
+                  var nameMaxLength = 30;
+                  var roleMaxLength = 15;
 
-      //            var msgArray = msg.content.split('\n');
+                  var msgArray = msg.content.split('\n');
 
-      //            msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
-      //            msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
+                  msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
+                  msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
 
-      //            var newEntry = '';
+                  var newEntry = '';
 
-      //            if (command[1].length < nameMaxLength) {
-      //               newEntry = command[1];
+                  if (command[1].length < nameMaxLength) {
+                     newEntry = command[1];
 
-      //               for (var i = command[1].length; i < nameMaxLength; i++) {
-      //                  newEntry += ' ';
-      //               }
-      //            }
-      //            else {
-      //               newEntry = command[1].substring(0, nameMaxLength);
-      //            }
+                     for (var i = command[1].length; i < nameMaxLength; i++) {
+                        newEntry += ' ';
+                     }
+                  }
+                  else {
+                     newEntry = command[1].substring(0, nameMaxLength);
+                  }
 
-      //            newEntry += ' | ';
+                  newEntry += ' | ';
 
-      //            if (command[2].length < roleMaxLength) {
-      //               newEntry += command[2];
+                  if (command[2].length < roleMaxLength) {
+                     newEntry += command[2];
 
-      //               for (var i = command[2].length; i < roleMaxLength; i++) {
-      //                  newEntry += ' ';
-      //               }
-      //            }
-      //            else {
-      //               newEntry = command[2].substring(0, roleMaxLength);
-      //            }
+                     for (var i = command[2].length; i < roleMaxLength; i++) {
+                        newEntry += ' ';
+                     }
+                  }
+                  else {
+                     newEntry = command[2].substring(0, roleMaxLength);
+                  }
 
-      //            msgArray.push(newEntry);
-      //            msgArray.sort();
+                  msgArray.push(newEntry);
+                  msgArray.sort();
 
-      //            msgArray.splice(0, 0, header);
-      //            msgArray.splice(0, 0, messageQuote);
-      //            msgArray.splice(msgArray.length - 1, 0, messageQuote);
+                  msgArray.splice(0, 0, header);
+                  msgArray.splice(0, 0, messageQuote);
+                  msgArray.splice(msgArray.length - 1, 0, messageQuote);
 
-      //            var newMessage = '';
-      //            for (var i = 0; i < msgArray.length; i++) {
-      //               newMessage += msgArray[i] + '\n';
-      //            }
+                  var newMessage = '';
+                  for (var i = 0; i < msgArray.length; i++) {
+                     newMessage += msgArray[i] + '\n';
+                  }
 
-      //            msg.edit(newMessage);
+                  msg.edit(newMessage);
 
-      //            notifySuccessRequest(message);
-      //         });
-      //      }
-      //      else {
-      //         invalidCommand(message);
-      //      }
-      //      break;
-      //   case '!del': // Removing from the black list
-      //      break;
-      //}
-
-      message.channel.send(`\`\`\`
-#13 = Empty
-#14 = Empty
-\`\`\``);
+                  notifySuccessRequest(message);
+               });
+            }
+            else {
+               invalidCommand(message);
+            }
+            break;
+         case '!del': // Removing from the black list
+            break;
+      }
    }
    // Log Channel
    else if (message.channel.id == botLogChannelId && message.author.id != botId) {
