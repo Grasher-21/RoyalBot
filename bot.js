@@ -152,17 +152,17 @@ client.on('message', message => {
    else if (message.channel.id == blackListChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
+      var header = 'NAME                           | ROLE           ';
+      var messageQuote = `\`\`\``;
+      var nameMaxLength = 30;
+      var roleMaxLength = 15;
+
       var command = message.content.split(' ');
 
       switch (command[0]) {
          case '!add': // Adding to the black list
             if (command.length == 3) {
                message.channel.messages.fetch(blackListMessageId).then(msg => {
-                  var header = 'NAME                           | ROLE           ';
-                  var messageQuote = `\`\`\``;
-                  var nameMaxLength = 30;
-                  var roleMaxLength = 15;
-
                   var msgArray = msg.content.split('\n');
 
                   msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
@@ -216,6 +216,13 @@ client.on('message', message => {
             }
             break;
          case '!del': // Removing from the black list
+            break;
+         case '!reset':
+            message.channel.messages.fetch(blackListMessageId).then(msg => {
+               msg.edit(`${messageQuote}
+${header}
+${messageQuote}`);
+            });
             break;
       }
    }
