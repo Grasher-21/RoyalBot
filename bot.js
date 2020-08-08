@@ -158,7 +158,7 @@ client.on('message', message => {
          case '!add': // Adding to the black list
             if (command.length == 3) {
                message.channel.messages.fetch(blackListMessageId).then(msg => {
-                  var header = 'NAME                           | ROLE           '
+                  var header = 'NAME                           | ROLE           ';
                   var messageQuote = `\`\`\``;
                   var nameMaxLength = 30;
                   var roleMaxLength = 15;
