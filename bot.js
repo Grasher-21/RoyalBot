@@ -154,83 +154,75 @@ client.on('message', message => {
 
       var command = message.content.split(' ');
 
-      switch (command[0]) {
-         case '!add': // Adding to the black list
-            if (command.length == 3) {
-               message.channel.messages.fetch(blackListMessageId).then(msg => {
-                  var header = 'NAME                           | ROLE           ';
-                  var messageQuote = `\`\`\``;
-                  var nameMaxLength = 30;
-                  var roleMaxLength = 15;
+      //switch (command[0]) {
+      //   case '!add': // Adding to the black list
+      //      if (command.length == 3) {
+      //         message.channel.messages.fetch(blackListMessageId).then(msg => {
+      //            var header = 'NAME                           | ROLE           ';
+      //            var messageQuote = `\`\`\``;
+      //            var nameMaxLength = 30;
+      //            var roleMaxLength = 15;
 
-                  var msgArray = msg.content.split('\n');
+      //            var msgArray = msg.content.split('\n');
 
-                  message.channel.send("reached #0");
+      //            msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
+      //            msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
 
-                  msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
-                  msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
+      //            var newEntry = '';
 
-                  var newEntry = '';
+      //            if (command[1].length < nameMaxLength) {
+      //               newEntry = command[1];
 
-                  message.channel.send("reached #1");
+      //               for (var i = command[1].length; i < nameMaxLength; i++) {
+      //                  newEntry += ' ';
+      //               }
+      //            }
+      //            else {
+      //               newEntry = command[1].substring(0, nameMaxLength);
+      //            }
 
-                  if (command[1].length < nameMaxLength) {
-                     newEntry = command[1];
+      //            newEntry += ' | ';
 
-                     for (var i = command[1].length; i < nameMaxLength; i++) {
-                        newEntry += ' ';
-                     }
-                  }
-                  else {
-                     newEntry = command[1].substring(0, nameMaxLength);
-                  }
+      //            if (command[2].length < roleMaxLength) {
+      //               newEntry += command[2];
 
-                  newEntry += ' | ';
+      //               for (var i = command[2].length; i < roleMaxLength; i++) {
+      //                  newEntry += ' ';
+      //               }
+      //            }
+      //            else {
+      //               newEntry = command[2].substring(0, roleMaxLength);
+      //            }
 
-                  if (command[2].length < roleMaxLength) {
-                     newEntry += command[2];
+      //            msgArray.push(newEntry);
+      //            msgArray.sort();
 
-                     for (var i = command[2].length; i < roleMaxLength; i++) {
-                        newEntry += ' ';
-                     }
-                  }
-                  else {
-                     newEntry = command[2].substring(0, roleMaxLength);
-                  }
+      //            msgArray.splice(0, 0, header);
+      //            msgArray.splice(0, 0, messageQuote);
+      //            msgArray.splice(msgArray.length - 1, 0, messageQuote);
 
-                  message.channel.send("reached #2");
+      //            var newMessage = '';
+      //            for (var i = 0; i < msgArray.length; i++) {
+      //               newMessage += msgArray[i] + '\n';
+      //            }
 
-                  msgArray.push(newEntry);
-                  msgArray.sort();
+      //            msg.edit(newMessage);
 
-                  message.channel.send("reached #3");
+      //            notifySuccessRequest(message);
+      //         });
+      //      }
+      //      else {
+      //         invalidCommand(message);
+      //      }
+      //      break;
+      //   case '!del': // Removing from the black list
+      //      break;
+      //}
 
-                  msgArray.splice(0, 0, header);
-                  msgArray.splice(0, 0, messageQuote);
-
-                  message.channel.send("reached #4");
-
-                  msgArray.splice(msgArray.length - 1, 0, messageQuote);
-
-                  message.channel.send("reached #5");
-
-                  var newMessage = '';
-                  for (var i = 0; i < msgArray.length; i++) {
-                     newMessage += msgArray[i] + '\n';
-                  }
-
-                  msg.edit(newMessage);
-
-                  notifySuccessRequest(message);
-               });
-            }
-            else {
-               invalidCommand(message);
-            }
-            break;
-         case '!del': // Removing from the black list
-            break;
-      }
+      message.channel.send(`\`\`\`
+#13 = Empty
+#14 = Empty
+\`\`\``);
    }
    // Log Channel
    else if (message.channel.id == botLogChannelId && message.author.id != botId) {
