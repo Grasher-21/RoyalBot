@@ -190,22 +190,21 @@ client.on('message', message => {
                   }
 
                   var msgArray = msg.content.split('\n');
-                  msgArray.push(newEntry);
 
                   msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
-                  msgArray.splice(msgArray.length - 2, 1); // Removing the characters that closes the quoting
+                  msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
+                  msgArray.push(newEntry);
                   msgArray.sort();
 
-                  msgArray.splice(0, 0, header);
-                  msgArray.splice(0, 0, messageQuote);
-                  msgArray.splice(msgArray.length - 1, 0, messageQuote);
-
-                  var newMessage = '';
+                  var entryList = '';
                   for (var i = 0; i < msgArray.length; i++) {
-                     newMessage += msgArray[i] + '\n';
+                     entryList += msgArray[i] + '\n';
                   }
 
-                  msg.edit(newMessage);
+                  msg.edit(`${messageQuote}
+${header}
+${entryList}
+${messageQuote}`);
 
                   notifySuccessRequest(message);
                });
