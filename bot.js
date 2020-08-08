@@ -13,6 +13,9 @@ const generalChannelId = '729853752911069275';
 const elryusChannelId = '729854794986160168';
 const elryusMessageId = '740225386050224249';
 
+const blackListChannelId = '741366781079453726';
+const blackListMessageId = '123';
+
 client.login(process.env.BOT_TOKEN);
 
 client.on('ready', () => {
@@ -43,7 +46,7 @@ client.on('message', message => {
    }
 
    // Test channel
-   if (message.channel.id == botTestChannelId) { 
+   if (message.channel.id == botTestChannelId) {
       if (message.author.id != userAdmin && message.author.id != botId) {
          message.delete();
       }
@@ -144,6 +147,56 @@ client.on('message', message => {
             }
             break;
       }
+   }
+   // Black Listed Channel
+   else if (message.channel.id == blackListChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
+      //logCommandRequest(message);
+
+      //var command = message.content.split(' ');
+
+      //switch (command[0]) {
+      //   case '!add': // Adding to the black list
+      //      if (command.length == 2) {
+      //         message.channel.messages.fetch(blackListMessageId).then(msg => {
+      //            var nameMaxLength = 20;
+      //            var roleMaxLength = 10;
+
+      //            var msgArray = msg.content.split('\n');
+      //            msgArray.add()
+      //            // NAME                 | ROLE   
+      //            // 12345678901234567890 | support
+      //            var newMessage = '';
+      //            for (var i = 0; i < msgArray.length; i++) {
+      //               newMessage += msgArray[i] + '\n';
+      //            }
+
+      //            msg.edit(newMessage);
+
+      //            notifySuccessRequest(message);
+      //         });
+      //      }
+      //      else {
+      //         invalidCommand(message);
+      //      }
+      //      break;
+      //   case '!del': // Removing from the black list
+      //      break;
+      //}
+
+      var tmp = `\`\`\`
+Place holder
+\`\`\``;
+      var arrTmp = tmp.split('\n');
+      var sortedArr = arrTmp.sort();
+      var msgTmp = '';
+      for (var i = 0; i < sortedArr.length; i++) {
+         msgTmp += sortedArr[i] + '\n';
+      }
+      message.channel.send(msgTmp);
+      
+      message.channel.send(`\`\`\`
+Place holder
+\`\`\``);
    }
    // Log Channel
    else if (message.channel.id == botLogChannelId && message.author.id != botId) {
