@@ -99,7 +99,6 @@ client.on('message', message => {
                invalidCommand(message);
             }
             break;
-
          case '!add': // Adding loot
             if (command.length >= 3 && command[1] >= 1 && command[1] <= 14) {
                message.channel.messages.fetch(elryusMessageId).then(msg => {
@@ -130,6 +129,9 @@ client.on('message', message => {
                invalidCommand(message);
             }
             break;
+         default:
+            invalidCommand(message);
+            break;
       }
    }
    // General Channel
@@ -147,6 +149,9 @@ client.on('message', message => {
             else {
                invalidCommand(message);
             }
+            break;
+         default:
+            invalidCommand(message);
             break;
       }
    }
@@ -263,7 +268,7 @@ client.on('message', message => {
             }
             break;
          default: // All other kind of messages will be deleted to keep the channel clean
-            message.delete();
+            invalidCommand(message);
             break;
       }
    }
