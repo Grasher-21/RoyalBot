@@ -255,7 +255,7 @@ client.on('message', message => {
                      notifySuccessRequest(message);
                   }
                   else {
-                     notifyNoUserFound(message);
+                     notifyUserDoesNotExist(message);
                   }
                }
                else {
@@ -311,7 +311,7 @@ function notifySuccessRequest(message) {
    message.delete({ timeout: 5000 });
 }
 
-function notifyNoUserFound(message) {
+function notifyUserDoesNotExist(message) {
    message.reply('user does not exist!').then(msg => {
       msg.delete({ timeout: 5000 });
    });
