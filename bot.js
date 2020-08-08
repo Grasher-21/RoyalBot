@@ -16,6 +16,8 @@ const elryusMessageId = '740225386050224249';
 const blackListChannelId = '741366781079453726';
 const blackListMessageId = '741464092211937282';
 
+const messageQuote = `\`\`\``;
+
 client.login(process.env.BOT_TOKEN);
 
 client.on('ready', () => {
@@ -153,7 +155,6 @@ client.on('message', message => {
       logCommandRequest(message);
 
       var header = 'NAME                           | ROLE           ';
-      var messageQuote = `\`\`\``;
       var nameMaxLength = 30;
       var roleMaxLength = 15;
 
@@ -198,13 +199,14 @@ client.on('message', message => {
 
                   var entryList = '';
                   for (var i = 0; i < msgArray.length; i++) {
-                     entryList += msgArray[i] + '\n';
+                     entryList += msgArray[i];
+
+                     if (i != msgArray.length - 1) {
+                        entryList += '\n';
+                     };
                   }
 
-                  msg.edit(`${messageQuote}
-${header}
-${entryList}
-${messageQuote}`);
+                  msg.edit(`${messageQuote}\n${header}\n${entryList}\n${messageQuote}`);
 
                   notifySuccessRequest(message);
                });
@@ -215,11 +217,10 @@ ${messageQuote}`);
             break;
          case '!del': // Removing from the black list
             break;
-         case '!reset':
+         case '!reset': // Reseting the layout of the black list
+            if (messa)
             message.channel.messages.fetch(blackListMessageId).then(msg => {
-               msg.edit(`${messageQuote}
-${header}
-${messageQuote}`);
+               msg.edit(`${messageQuote}\n${header}\n${messageQuote}`);
             });
 
             notifySuccessRequest(message);
@@ -239,14 +240,14 @@ function logCommandRequest(message) {
       nickname = message.member.nickname;
    }
 
-   client.channels.cache.get(botLogChannelId).send(`\`\`\`
+   client.channels.cache.get(botLogChannelId).send(`${messageQuote}
 Command requested: ${message.content}
 Channel: ${message.channel.name}
 Nickname: ${nickname}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
 UserID: ${message.author.id}
-\`\`\``);
+${messageQuote}`);
 }
 
 function notifySuccessRequest(message) {
