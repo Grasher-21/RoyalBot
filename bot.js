@@ -218,12 +218,16 @@ client.on('message', message => {
          case '!del': // Removing from the black list
             break;
          case '!reset': // Reseting the layout of the black list
-            if (messa)
-            message.channel.messages.fetch(blackListMessageId).then(msg => {
-               msg.edit(`${messageQuote}\n${header}\n${messageQuote}`);
-            });
+            if (message.author.id == userAdmin) {
+               message.channel.messages.fetch(blackListMessageId).then(msg => {
+                  msg.edit(`${messageQuote}\n${header}\n${messageQuote}`);
+               });
 
-            notifySuccessRequest(message);
+               notifySuccessRequest(message);
+            }
+            else {
+               invalidCommand(message);
+            }
             break;
       }
    }
