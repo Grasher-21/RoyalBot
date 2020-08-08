@@ -154,7 +154,7 @@ client.on('message', message => {
    else if (message.channel.id == blackListChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
-      var header = 'NAME                           | ROLE           ';
+      var header = '------------- NAME ------------|------ ROLE ----';
       var nameMaxLength = 30;
       var roleMaxLength = 15;
 
@@ -191,7 +191,6 @@ client.on('message', message => {
                   }
 
                   var msgArray = msg.content.split('\n');
-
                   msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
                   msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
                   msgArray.push(newEntry);
@@ -215,9 +214,40 @@ client.on('message', message => {
                invalidCommand(message);
             }
             break;
-         case '!del': // Removing from the black list
+         case '!del':
+         case '!delete': // Removing from the black list
+            message.channel.messages.fetch(blackListMessageId).then(msg => {
+               if (command.length == 2) {
+                  var msgArray = msg.content.split('\n');
+                  msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
+                  msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
+
+                  for (var i = 0; i < msgArray.length; i++) {
+                     var playerName = msgArray[i].substring(0, nameMaxLength);
+                     playerName = playerName.trim();
+
+                     if (command[1] == playerName) {
+                        msgArray.splice(i, 1);
+                     }
+                  }
+
+                  var entryList = '';
+                  for (var i = 0; i < msgArray.length; i++) {
+                     entryList += msgArray[i];
+
+                     if (i != msgArray.length - 1) {
+                        entryList += '\n';
+                     };
+                  }
+
+                  msg.edit(`${messageQuote}\n${header}\n${entryList}\n${messageQuote}`);
+               }
+               else {
+                  invalidCommand(message);
+               }
+            });
             break;
-         case '!reset': // Reseting the layout of the black list
+         case '!reset': // Reseting the layout of the black list (only user admin can reset)
             if (message.author.id == userAdmin) {
                message.channel.messages.fetch(blackListMessageId).then(msg => {
                   msg.edit(`${messageQuote}\n${header}\n${messageQuote}`);
@@ -228,6 +258,9 @@ client.on('message', message => {
             else {
                invalidCommand(message);
             }
+            break;
+         default: // All other kind of messages will be deleted to keep the channel clean
+            message.delete();
             break;
       }
    }
@@ -245,7 +278,7 @@ function logCommandRequest(message) {
    }
 
    client.channels.cache.get(botLogChannelId).send(`${messageQuote}
-Command requested: ${message.content}
+Requested command: ${message.content}
 Channel: ${message.channel.name}
 Nickname: ${nickname}
 Username: ${message.author.username}
