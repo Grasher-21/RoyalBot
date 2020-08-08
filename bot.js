@@ -197,7 +197,7 @@ client.on('message', message => {
                   msgArray.sort();
                   msgArray.splice(0, 0, header);
                   msgArray.splice(0, 0, messageQuote);
-                  msgArray.splice(msgArray.length, 0, messageQuote);
+                  msgArray.splice(msgArray.length - 1, 0, messageQuote);
 
                   var newMessage = '';
                   for (var i = 0; i < msgArray.length; i++) {
