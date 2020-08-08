@@ -163,11 +163,6 @@ client.on('message', message => {
          case '!add': // Adding to the black list
             if (command.length == 3) {
                message.channel.messages.fetch(blackListMessageId).then(msg => {
-                  var msgArray = msg.content.split('\n');
-
-                  msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
-                  msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
-
                   var newEntry = '';
 
                   if (command[1].length < nameMaxLength) {
@@ -194,7 +189,11 @@ client.on('message', message => {
                      newEntry = command[2].substring(0, roleMaxLength);
                   }
 
+                  var msgArray = msg.content.split('\n');
                   msgArray.push(newEntry);
+
+                  msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
+                  msgArray.splice(msgArray.length - 2, 1); // Removing the characters that closes the quoting
                   msgArray.sort();
 
                   msgArray.splice(0, 0, header);
@@ -223,6 +222,8 @@ client.on('message', message => {
 ${header}
 ${messageQuote}`);
             });
+
+            notifySuccessRequest(message);
             break;
       }
    }
