@@ -159,7 +159,7 @@ client.on('message', message => {
    else if (message.channel.id == blackListChannelId && message.content.startsWith(botCommand) && message.author.id != botId) {
       logCommandRequest(message);
 
-      var header = 'NAME                          | ROLE           ';
+      var header = 'NAME                           | ROLE           ';
       var nameMaxLength = 30;
       var roleMaxLength = 15;
 
