@@ -164,10 +164,15 @@ client.on('message', message => {
                   var roleMaxLength = 15;
 
                   var msgArray = msg.content.split('\n');
+
+                  message.channel.send("reached #0");
+
                   msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
                   msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
 
                   var newEntry = '';
+
+                  message.channel.send("reached #1");
 
                   if (command[1].length < nameMaxLength) {
                      newEntry = command[1];
@@ -193,11 +198,21 @@ client.on('message', message => {
                      newEntry = command[2].substring(0, roleMaxLength);
                   }
 
+                  message.channel.send("reached #2");
+
                   msgArray.add(newEntry);
                   msgArray.sort();
+
+                  message.channel.send("reached #3");
+
                   msgArray.splice(0, 0, header);
                   msgArray.splice(0, 0, messageQuote);
+
+                  message.channel.send("reached #4");
+
                   msgArray.splice(msgArray.length - 1, 0, messageQuote);
+
+                  message.channel.send("reached #5");
 
                   var newMessage = '';
                   for (var i = 0; i < msgArray.length; i++) {
@@ -232,6 +247,7 @@ function logCommandRequest(message) {
 
    client.channels.cache.get(botLogChannelId).send(`\`\`\`
 Command requested: ${message.content}
+Channel: ${message.channel.name}
 Nickname: ${nickname}
 Username: ${message.author.username}
 Tag: ${message.author.tag}
