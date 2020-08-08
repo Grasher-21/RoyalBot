@@ -227,28 +227,36 @@ client.on('message', message => {
                   msgArray.splice(0, 2); // Removing the characters that opens the quoting and the header
                   msgArray.splice(msgArray.length - 1, 1); // Removing the characters that closes the quoting
 
+                  var findPlayer = false;
+
                   for (var i = 0; i < msgArray.length; i++) {
                      var playerName = msgArray[i].substring(0, nameMaxLength);
                      playerName = playerName.trim();
 
                      if (command[1] == playerName) {
+                        findPlayer = true;
                         msgArray.splice(i, 1);
                         i--;
                      }
                   }
 
-                  var entryList = '';
-                  for (var i = 0; i < msgArray.length; i++) {
-                     entryList += msgArray[i];
+                  if (findPlayer) {
+                     var entryList = '';
+                     for (var i = 0; i < msgArray.length; i++) {
+                        entryList += msgArray[i];
 
-                     if (i != msgArray.length - 1) {
-                        entryList += '\n';
-                     };
+                        if (i != msgArray.length - 1) {
+                           entryList += '\n';
+                        };
+                     }
+
+                     msg.edit(`${messageQuote}\n${header}\n${entryList}\n${messageQuote}`);
+
+                     notifySuccessRequest(message);
                   }
-
-                  msg.edit(`${messageQuote}\n${header}\n${entryList}\n${messageQuote}`);
-
-                  notifySuccessRequest(message);
+                  else {
+                     notifyNoUserFound(message);
+                  }
                }
                else {
                   invalidCommand(message);
@@ -297,6 +305,14 @@ ${messageQuote}`);
 
 function notifySuccessRequest(message) {
    message.reply('command executed successfully!').then(msg => {
+      msg.delete({ timeout: 5000 });
+   });
+
+   message.delete({ timeout: 5000 });
+}
+
+function notifyNoUserFound(message) {
+   message.reply('user does not exist!').then(msg => {
       msg.delete({ timeout: 5000 });
    });
 
