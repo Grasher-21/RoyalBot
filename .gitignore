@@ -1,3 +1,5 @@
 /.vs
 BOT_TOKEN
 *.sln
+setup.txt
+/node_modules
